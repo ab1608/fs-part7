@@ -11,6 +11,7 @@ import LoginForm from './components/LoginForm';
 import { Link, Route, Routes, useMatch } from 'react-router-dom';
 import BlogList from './components/BlogList.jsx';
 import { AppBar, Button, Container, Toolbar } from '@mui/material';
+import PageUnknown from './components/PageUnknown.jsx';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -154,6 +155,8 @@ const App = () => {
                 />
               }
             ></Route>
+
+            <Route path={'*'} element={<PageUnknown />}></Route>
           </Routes>
         </ErrorBoundary>
       </div>
