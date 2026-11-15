@@ -1,10 +1,15 @@
-const { test, describe, beforeEach, after } = require('node:test');
+const { test, describe, before, beforeEach, after } = require('node:test');
 const assert = require('node:assert');
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const app = require('../app');
+const config = require('../utils/config');
 const Blog = require('../models/blog');
 const listHelper = require('../utils/list_helper');
+
+before(async () => {
+  await mongoose.connect(config.MONGODB_URI, { family: 4 });
+});
 
 beforeEach(async () => {
   await Blog.deleteMany({});

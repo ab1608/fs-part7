@@ -1,13 +1,18 @@
-const { test, describe, beforeEach, after } = require('node:test');
+const { test, describe, before, beforeEach, after } = require('node:test');
 const assert = require('node:assert');
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const app = require('../app');
+const config = require('../utils/config');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const userHelper = require('../utils/user_helper');
 
 const api = supertest(app);
+
+before(async () => {
+  await mongoose.connect(config.MONGODB_URI, { family: 4 });
+});
 
 const initialUser = [
   {

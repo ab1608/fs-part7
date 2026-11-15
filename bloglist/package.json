@@ -1,5 +1,11 @@
 {
   "devDependencies": {
+    "concurrently": "^10.0.7",
     "prettier": "^3.10.1"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "NODE_ENV=production npm start --prefix server"
   }
 }
