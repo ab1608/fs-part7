@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Card,
-  CardContent,
-  CardActions,
-  CardHeader,
   Button,
-  Box,
-  Stack,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
   Link,
   Typography,
 } from '@mui/material';

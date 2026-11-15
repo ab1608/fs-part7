@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import {
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from '@mui/material';
 
 const BlogList = ({ blogs }) => {

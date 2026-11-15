@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 
 const BlogForm = ({ handleNewBlog }) => {
   const [title, setTitle] = useState('');

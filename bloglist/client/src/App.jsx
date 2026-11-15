@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './components/ErrorFallback.jsx';
 import blogService from './services/blogs';
 import loginService from './services/login';
 import Blog from './components/Blog';
@@ -6,10 +8,9 @@ import BlogForm from './components/BlogForm';
 import Notification from './components/Notification';
 import User from './components/User';
 import LoginForm from './components/LoginForm';
-import Togglable from './components/Togglable';
-import { Routes, Route, Link, useMatch } from 'react-router-dom';
+import { Link, Route, Routes, useMatch } from 'react-router-dom';
 import BlogList from './components/BlogList.jsx';
-import { Container, AppBar, Toolbar, Button } from '@mui/material';
+import { AppBar, Button, Container, Toolbar } from '@mui/material';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -131,28 +132,30 @@ const App = () => {
           </Toolbar>
         </AppBar>
 
-        <Notification notification={notification}></Notification>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Notification notification={notification}></Notification>
 
-        {/* Routes and their corresponding elements */}
-        <Routes>
-          <Route path={'/'} element={<BlogList blogs={blogs} />}></Route>
+          {/* Routes and their corresponding elements */}
+          <Routes>
+            <Route path={'/'} element={<BlogList blogs={blogs} />}></Route>
 
-          <Route path={'/login'} element={displayLogin()}></Route>
+            <Route path={'/login'} element={displayLogin()}></Route>
 
-          <Route path={'/create'} element={<BlogForm handleNewBlog={addBlog} />}></Route>
+            <Route path={'/create'} element={<BlogForm handleNewBlog={addBlog} />}></Route>
 
-          <Route
-            path={'/api/blogs/:id'}
-            element={
-              <Blog
-                blog={matchBlog}
-                handleLikes={handleLikes}
-                handleDelete={deleteBlog}
-                loggedUser={user}
-              />
-            }
-          ></Route>
-        </Routes>
+            <Route
+              path={'/api/blogs/:id'}
+              element={
+                <Blog
+                  blog={matchBlog}
+                  handleLikes={handleLikes}
+                  handleDelete={deleteBlog}
+                  loggedUser={user}
+                />
+              }
+            ></Route>
+          </Routes>
+        </ErrorBoundary>
       </div>
     </Container>
   );
